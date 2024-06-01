@@ -1,0 +1,9 @@
+---
+- name: ping them all
+  hosts: all
+  user: centos
+  vars_files:
+    - vars/global-vars.yml
+  tasks:
+    - name: pinging
+      ping:

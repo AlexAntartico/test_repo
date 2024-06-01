@@ -1,0 +1,19 @@
+---
+- name: ping them all
+  hosts: all
+  user: centos
+  become: true
+  vars_files:
+    - vars/global-vars.yml
+  tasks:
+    - name: Update all installed packages using YUM module
+      yum:
+        name: "*"
+        state: latest
+        update_cache: true
+        update_only: true
+      register: yum_update_status
+
+    - name: Remove packages not needed anymore
+      yum:
+        autoremove: true
